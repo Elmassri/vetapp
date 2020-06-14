@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
   const classes = useStyles();
   const [email,setEmail]=useState('');
   const [pass,setPass]=useState('');
@@ -68,7 +68,7 @@ export default function SignIn() {
             event.preventDefault();
              try 
             {
-                const response = await fetch(`http://127.0.0.1:8000/api/login/?email=${this.state.email}&password=${this.state.password}`, {
+                const response = await fetch(`http://127.0.0.1:8000/api/login/?username=${email}&password=${pass}`, {
                     method: 'POST'
                 });
     
@@ -77,7 +77,7 @@ export default function SignIn() {
                 {
                     console.log("done")
                     localStorage.setItem('token', result.token) 
-                   
+                    props.handleLogin()
                     
                 } 
                 else 

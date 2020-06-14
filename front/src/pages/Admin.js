@@ -18,16 +18,31 @@ class Admin extends React.Component{
         super(props);
         this.state={
             
-
+            list:[],
         };
-    }
+   }
+    async componentDidMount() {
+        const token = localStorage.getItem('token');
+        if (token !== undefined && token !== null) {
+    
+          try {
+            const response = await fetch(`http://127.0.0.1:8000/api/owners-pets?token=${token}`);
+            const json = await response.json();
+    
+            this.setState({
+              list:json.data
+              
+            })
+          } catch (error) {}
+        }
+      }
 
 
     render(){
         return(
             <>
             <Header></Header>
-            <TableForm style={{width:'100px'}} ></TableForm>
+            <TableForm style={{width:'100px'}} list={this.state.list}></TableForm>
             <Footer />
               
             

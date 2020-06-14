@@ -25,8 +25,8 @@ import NewVisit from './pages/NewVisit'
 import AddUser from './pages/AddUser'
 
 import PetDetail from './pages/PetDetail';
-import ViewDetails from './pages/ViewDetails'
-
+import ViewDetails from './pages/ViewDetails';
+import AuthForm from './components/AuthForm';
 
 
 const DashboardPage = React.lazy(() => import('pages/DashboardPage'));
@@ -45,6 +45,12 @@ class App extends React.Component {
       loggedIn: false,
     }}
 
+    handleLogin =  () => {
+    
+      this.setState({
+        loggedIn: true
+      })
+    }
 
 
   async componentDidMount() {
@@ -91,10 +97,12 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter basename={getBasename()}>
+        {
+          !this.state.loggedIn ? <AuthForm handleLogin={this.handleLogin} /> : (
         <GAListener>
           <Switch>
           
-            <MainLayout breakpoint={this.props.breakpoint}>
+            <MainLayout breakpoint={this.props.breakpoint} logout={this.handleLogout}>
               <React.Suspense fallback={<PageSpinner />}>
                 <Route exact path="/" component={(props => {
                   return <Admin/>
@@ -139,7 +147,7 @@ class App extends React.Component {
             <Redirect to="/" />
           </Switch>
         </GAListener>
-     
+          )}
       </BrowserRouter>
     );
   }

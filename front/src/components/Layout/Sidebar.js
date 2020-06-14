@@ -43,7 +43,8 @@ const navItems = [
   { to: '/charts', name: 'charts', exact: false, Icon: MdInsertChart },
   { to: '/widgets', name: 'widgets', exact: false, Icon: MdWidgets }, */
 
-  { to: '/addUser', name: 'adduser', exact: false, Icon: MdAdd }
+  { to: '/addUser', name: 'adduser', exact: false, Icon: MdAdd },
+  
  
 ];
 
@@ -55,7 +56,7 @@ class Sidebar extends React.Component {
     isOpenContents: true,
     isOpenPages: true,
   };
-
+  
   handleClick = name => () => {
     this.setState(prevState => {
       const isOpen = prevState[`isOpen${name}`];
@@ -100,8 +101,9 @@ class Sidebar extends React.Component {
                   <span className="">{name}</span>
                 </BSNavLink>
               </NavItem>
+              
             ))}
-
+              <NavItem onClick={this.props.logout}>logout</NavItem>
 
           </Nav>
         </div>

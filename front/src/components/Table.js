@@ -35,15 +35,17 @@ render(){
     <MaterialTable
       title="Pet Info"
       columns={[
-        { title: 'Owner id', field: 'id' ,type:'numeric', searchable:this.state.search},
-        { title: 'Pet id', field: 'petId' ,type:'numeric', searchable:!this.state.search},
+        { title: 'Owner id', field: 'owner_id' ,type:'numeric', searchable:this.state.search},
 
-        {title:'Owner Name',field:'name',searchable:false},
-         
-        { title: 'Pet name', field: 'petname',searchable:false },
-      
+        {title:'First Name',field:'owner_first_name',searchable:false},
+        {title:'Last Name',field:'owner_last_name',searchable:false},
+        {title:'Phone number',field:'owner_phone_number',searchable:false},
+
+        { title: 'Pet id', field: 'pet_id' ,type:'numeric', searchable:!this.state.search},
+        { title: 'Pet name', field: 'pet_name',searchable:false },
+        { title: 'species', field: 'species',searchable:false },
       ]}
-      data={this.state.data}
+      data={this.props.list}
       onRowClick={(event, rowData, togglePanel) => this.props.history.push(
         {pathname: '/petDetail',
   
